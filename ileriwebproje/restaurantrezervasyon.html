@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restoran Rezervasyon</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background-color: var(--primary);
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(18, 18, 18, 0.98);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2.5rem;
+    }
+
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .reservation-section {
+      max-width: 800px;
+      margin: 100px auto;
+      padding: 2rem;
+      background: var(--secondary);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .reservation-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .reservation-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .reservation-form input,
+    .reservation-form select,
+    .reservation-form textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--light);
+      border-radius: 5px;
+      background: var(--primary);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .reservation-form button {
+      background-color: var(--gold);
+      color: var(--white);
+      border: none;
+      padding: 1rem;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .reservation-form button:hover {
+      background-color: rgba(136, 119, 63, 0.8);
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: var(--gold);
+      color: var(--white);
+      border-radius: 5px;
+    }
+
+    .success-message button {
+      margin-top: 1rem;
+      background-color: var(--white);
+      color: var(--gold);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .success-message button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">Lezzet Durağı</div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index1.html">Ana Sayfa</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Rezervasyon Formu -->
+  <section class="reservation-section">
+    <h1>Restoran Rezervasyonu</h1>
+    <form class="reservation-form" id="reservation-form">
+      <input type="text" placeholder="Adınız ve Soyadınız" required>
+      <input type="email" placeholder="E-posta Adresiniz" required>
+      <input type="tel" placeholder="Telefon Numaranız" required>
+      <input type="date" id="reservation-date" required>
+      <select required>
+        <option value="" disabled selected>Kişi Sayısı</option>
+        <option value="1">1 Kişi</option>
+        <option value="2">2 Kişi</option>
+        <option value="3">3 Kişi</option>
+        <option value="4">4 Kişi</option>
+        <option value="5">5+ Kişi</option>
+      </select>
+      <select required>
+        <option value="" disabled selected>Masa Numarası</option>
+        <option value="1">🍽️ Salon 1</option>
+        <option value="2">🍽️ Salon 2</option>
+        <option value="3">🍽️ Salon 3</option>
+        <option value="4">🌅 Teras 1</option>
+        <option value="5">🌅 Teras 2</option>
+        <option value="6">🌅 Teras 3</option>
+        <option value="7">🌳 Bahçe 1</option>
+        <option value="8">🌳 Bahçe 2</option>
+        <option value="9">🌳 Bahçe 3</option>
+      </select>
+      <textarea rows="4" placeholder="Özel İstekleriniz"></textarea>
+      <button type="submit">Rezervasyon Yap</button>
+    </form>
+    <div class="success-message" id="success-message">
+      <p>Rezervasyonunuz başarıyla oluşturuldu. Detaylar e-posta adresinize gönderilmiştir.</p>
+      <button id="reset-button">Bitti</button>
+    </div>
+  </section>
+
+  <script>
+    // Eski tarihlerin seçilmesini engelle
+    const dateInput = document.getElementById('reservation-date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+
+    // Form gönderildiğinde mesaj göster
+    const form = document.getElementById('reservation-form');
+    const successMessage = document.getElementById('success-message');
+    const resetButton = document.getElementById('reset-button');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Formun varsayılan gönderimini engelle
+      form.style.display = 'none'; // Formu gizle
+      successMessage.style.display = 'block'; // Başarı mesajını göster
+    });
+
+    // Bitti butonuna basıldığında formu sıfırla
+    resetButton.addEventListener('click', function () {
+      form.reset(); // Formu sıfırla
+      form.style.display = 'flex'; // Formu tekrar göster
+      successMessage.style.display = 'none'; // Başarı mesajını gizle
+    });
+  </script>
+</body>
+</html>

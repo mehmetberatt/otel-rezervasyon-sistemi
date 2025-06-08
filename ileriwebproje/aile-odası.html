@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Aile Odası Galeri</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b0b0b;
+      }
+
+      .gallery-container {
+        position: relative;
+        max-width: 1000px;
+        margin: 60px auto;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .gallery-image {
+        width: 100%;
+        height: 700px;
+        object-fit: cover;
+        display: none;
+      }
+
+      .gallery-image.active {
+        display: block;
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        font-size: 28px;
+        border-radius: 50%;
+      }
+
+      .arrow:hover {
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .arrow.left {
+        left: 15px;
+      }
+
+      .arrow.right {
+        right: 15px;
+      }
+
+      .back-link {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.3rem;
+        background: #aa2626;
+        padding: 12px 24px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        background: #8b1f1f;
+        text-decoration: none;
+      }
+
+      .back-container {
+        text-align: center;
+        margin: 30px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gallery-container">
+      <img
+        src="resimler/tom09578.jpg"
+        class="gallery-image active"
+        alt="Aile Odası 1"
+      />
+      <img
+        src="resimler/aileodasi1.jpg"
+        class="gallery-image"
+        alt="Aile Odası 2"
+      />
+      <img
+        src="resimler/aileodasi2.jpg"
+        class="gallery-image"
+        alt="Aile Odası 3"
+      />
+
+      <button class="arrow left" onclick="changeSlide(-1)">&#10094;</button>
+      <button class="arrow right" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <div class="back-container">
+      <a class="back-link" href="odalar.html">&larr; Geri Dön</a>
+    </div>
+
+    <script>
+      let currentIndex = 0;
+      const images = document.querySelectorAll(".gallery-image");
+
+      function showImage(index) {
+        images.forEach((img, i) => {
+          img.classList.toggle("active", i === index);
+        });
+      }
+
+      function changeSlide(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) currentIndex = images.length - 1;
+        if (currentIndex >= images.length) currentIndex = 0;
+        showImage(currentIndex);
+      }
+    </script>
+  </body>
+</html>

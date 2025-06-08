@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Hotel | Rezervasyon</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/css/intlTelInput.min.css"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        background: url("resimler/iletisimbackgroun.jpg") no-repeat center fixed;
+        background-size: cover;
+        color: #fff;
+      }
+
+      .overlay {
+        background-color: rgba(0, 0, 0, 0.75);
+        min-height: 100vh;
+        padding: 50px 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: "Playfair Display", serif;
+        color: #8c1a1a; /* Buraya istediğiniz rengi yazın */
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        box-sizing: border-box;
+      }
+
+      .row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .row .form-group {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      .room-image {
+        width: 100%;
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-top: 20px;
+        display: none;
+      }
+
+      .availability-message {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      .btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+        background-image: linear-gradient(to right, #691616, #8c1a1a);
+      }
+
+      .btn:hover {
+        background-image: linear-gradient(to right, #8c1a1a, #691616);
+      }
+
+      .reserve-btn {
+        display: none;
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .reserve-btn.available {
+        background-color: #28a745;
+        color: white;
+      }
+
+      .reserve-btn.unavailable {
+        background-color: #dc3545;
+        color: white;
+      }
+
+      .back-button {
+        display: block;
+        width: max-content;
+        margin: 30px auto 0;
+        padding: 12px 25px;
+        background: #8b1f1f;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .back-button:hover {
+        background: #a52a2a;
+      }
+
+      .back-button::before {
+        content: "← ";
+      }
+
+      .success-message {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+        color: lightgreen;
+        display: none;
+      }
+
+      .error-message {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+        color: red;
+        display: none;
+      }
+      .iti {
+        width: 100%;
+      }
+
+      #telefon,
+      input[type="tel"] {
+        width: 100% !important;
+        min-width: 0;
+        box-sizing: border-box;
+        padding: 10px 10px 10px 58px !important; /* Sol padding artırıldı */
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        height: 42px;
+        background: #fff; /* Arka planı beyaz yap */
+        color: #222; /* Yazı rengini koyu yap */
+      }
+
+      .iti__selected-dial-code {
+        background: #fff; /* Arka planı beyaz yap */
+        color: #222; /* Yazı rengini koyu yap */
+      }
+
+      /*.iti__flag {
+        background-color: transparent !important;
+        background-image: none !important;
+      } */
+
+      .iti__country-list {
+        background-color: #fff !important;
+        color: #222 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay">
+      <div class="container">
+        <h1>Rezervasyon Yap</h1>
+        <div class="row">
+          <div class="form-group">
+            <label for="ad">Ad:</label>
+            <input type="text" id="ad" placeholder="Adınız" required />
+          </div>
+          <div class="form-group">
+            <label for="soyad">Soyad:</label>
+            <input type="text" id="soyad" placeholder="Soyadınız" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-posta Adresi:</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="ornek@mail.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefon"> Telefon Numarası:</label>
+          <input
+            type="tel"
+            id="telefon"
+            placeholder="Telefon Numaranızı Girin: "
+            required
+          />
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="girisTarihi">Giriş Tarihi:</label>
+            <input type="date" id="girisTarihi" />
+          </div>
+          <div class="form-group">
+            <label for="cikisTarihi">Çıkış Tarihi:</label>
+            <input type="date" id="cikisTarihi" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label for="odaTipi">Oda Tipi Seçiniz:</label>
+            <select id="odaTipi">
+              <option value="standart">🛏️ Standart Oda</option>
+              <option value="deluxe">💎 Deluxe Oda</option>
+              <option value="suit">👑 Suit Oda</option>
+              <option value="aile">👨‍👩‍👧‍👦 Aile Odası</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="kisiSayisi">Kişi Sayısı:</label>
+            <select id="kisiSayisi">
+              <option value="1">1 Kişi</option>
+              <option value="2">2 Kişi</option>
+              <option value="3">3 Kişi</option>
+              <option value="4">4 Kişi</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="odemeYontemi">Ödeme Yöntemi:</label>
+          <select id="odemeYontemi" required>
+            <option value="">Seçiniz</option>
+            <option value="kredi">💳 Kredi Kartı</option>
+            <option value="havale">🏦 Havale/EFT</option>
+            <option value="kapida">💵Kapıda Ödeme</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="krediKartiBilgileri" style="display: none">
+          <label for="kartNo">Kart Numarası:</label>
+          <input
+            type="text"
+            id="kartNo"
+            maxlength="19"
+            placeholder="XXXX XXXX XXXX XXXX"
+          />
+
+          <label for="sonKullanma">Son Kullanma Tarihi:</label>
+          <input
+            type="text"
+            id="sonKullanma"
+            maxlength="5"
+            placeholder="AA/YY"
+          />
+
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" maxlength="3" placeholder="CVV" />
+        </div>
+        <div class="form-group" id="eftBilgisi" style="display: none">
+          <label><b>Banka/EFT Numaramız:</b></label>
+          <div
+            style="
+              background: #fff;
+              color: #222;
+              padding: 10px;
+              border-radius: 6px;
+              font-weight: bold;
+            "
+          >
+            TR12 3456 7890 1234 5678 9012 34
+          </div>
+        </div>
+
+        <img id="odaResmi" class="room-image" src="" alt="Oda Görseli" />
+
+        <div class="availability-message" id="mesaj"></div>
+
+        <button class="btn" onclick="kontrolEt()">Müsaitliği Kontrol Et</button>
+
+        <button
+          id="rezervasyonBtn"
+          class="reserve-btn"
+          onclick="rezervasyonYap()"
+        >
+          Rezervasyon Yap
+        </button>
+
+        <div id="successMessage" class="success-message">
+          Rezervasyonunuz başarıyla alındı. E-posta adresinize bilgi gönderildi.
+        </div>
+
+        <div id="errorMessage" class="error-message">
+          Rezervasyon yapılamadı. Müsaitlik durumu uygun değil.
+        </div>
+
+        <a href="index.html" class="back-button">Geri Dön</a>
+      </div>
+    </div>
+
+    <script>
+      const odaResimleri = {
+        standart: "resimler/niraj-golhar-_IUPyuiHiJo-unsplash.jpg",
+        deluxe: "resimler/upgraded-points-x9HiNJr4dQQ-unsplash.jpg",
+        suit: "resimler/otel-konaklamalarinda-suit-oda-ne-demek-071099.webp",
+        aile: "resimler/tom09578.jpg",
+      };
+
+      const fiyatlar = {
+        standart: 100,
+        deluxe: 150,
+        suit: 200,
+        aile: 250,
+      };
+
+      let musaitlikDurumu = false;
+
+      const girisInput = document.getElementById("girisTarihi");
+      const cikisInput = document.getElementById("cikisTarihi");
+      const odaTipi = document.getElementById("odaTipi");
+      const odaResmi = document.getElementById("odaResmi");
+      const rezervasyonBtn = document.getElementById("rezervasyonBtn");
+      const successMessage = document.getElementById("successMessage");
+      const errorMessage = document.getElementById("errorMessage");
+
+      // Bugünden öncesi seçilemesin
+      const bugun = new Date().toISOString().split("T")[0];
+      girisInput.min = bugun;
+      girisInput.value = bugun;
+      cikisInput.min = bugun;
+
+      girisInput.addEventListener("change", () => {
+        cikisInput.min = girisInput.value;
+        if (cikisInput.value < girisInput.value) {
+          cikisInput.value = girisInput.value;
+        }
+      });
+
+      odaTipi.addEventListener("change", () => {
+        const secilen = odaTipi.value;
+        odaResmi.src = odaResimleri[secilen];
+        odaResmi.style.display = "block";
+      });
+
+      function kontrolEt() {
+        const giris = new Date(girisInput.value);
+        const cikis = new Date(cikisInput.value);
+        const secilenOda = odaTipi.value;
+        const kisiSayisi = parseInt(
+          document.getElementById("kisiSayisi").value
+        );
+        const mesaj = document.getElementById("mesaj");
+
+        // Mesajları ve butonu gizle
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none";
+        rezervasyonBtn.style.display = "none";
+
+        if (cikis <= giris) {
+          mesaj.textContent = "Çıkış tarihi, giriş tarihinden sonra olmalıdır.";
+          mesaj.style.color = "red";
+          return;
+        }
+
+        const gunFarki = Math.ceil((cikis - giris) / (1000 * 60 * 60 * 24));
+        const toplamFiyat = fiyatlar[secilenOda] * kisiSayisi * gunFarki;
+        musaitlikDurumu = Math.random() < 0.5; // Rastgele müsaitlik durumu
+
+        if (musaitlikDurumu) {
+          mesaj.textContent = `Müsait! Toplam Fiyat: ${toplamFiyat}₺`;
+          mesaj.style.color = "lightgreen";
+          rezervasyonBtn.className = "reserve-btn available";
+          rezervasyonBtn.textContent = "Rezervasyon Yap";
+          rezervasyonBtn.style.display = "block";
+        } else {
+          mesaj.textContent =
+            "Üzgünüz, seçtiğiniz tarihlerde bu oda tipi müsait değil.";
+          mesaj.style.color = "orange";
+          rezervasyonBtn.className = "reserve-btn unavailable";
+          rezervasyonBtn.textContent = "Rezervasyon Yap (Müsait Değil)";
+          rezervasyonBtn.style.display = "block";
+        }
+
+        odaResmi.src = odaResimleri[secilenOda];
+        odaResmi.style.display = "block";
+      }
+
+      // Sayfa yüklenince ilk resmi göster
+      window.addEventListener("DOMContentLoaded", () => {
+        odaResmi.src = odaResimleri[odaTipi.value];
+        odaResmi.style.display = "block";
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none"; // <-- Bunu ekle
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>
+    <script>
+      const input = document.querySelector("#telefon");
+      window.intlTelInput(input, {
+        initialCountry: "tr",
+        preferredCountries: ["tr", "us", "de", "gb", "fr"],
+        utilsScript:
+          "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/utils.js",
+      });
+
+      const odemeYontemi = document.getElementById("odemeYontemi");
+      const krediKartiBilgileri = document.getElementById(
+        "krediKartiBilgileri"
+      );
+
+      odemeYontemi.addEventListener("change", function () {
+        if (this.value === "kredi") {
+          krediKartiBilgileri.style.display = "block";
+        } else {
+          krediKartiBilgileri.style.display = "none";
+        }
+      });
+      // EFT ve kredi kartı alanlarını göster/gizle
+      const eftBilgisi = document.getElementById("eftBilgisi");
+      odemeYontemi.addEventListener("change", function () {
+        if (this.value === "kredi") {
+          krediKartiBilgileri.style.display = "block";
+          eftBilgisi.style.display = "none";
+        } else if (this.value === "havale") {
+          krediKartiBilgileri.style.display = "none";
+          eftBilgisi.style.display = "block";
+        } else {
+          krediKartiBilgileri.style.display = "none";
+          eftBilgisi.style.display = "none";
+        }
+      });
+
+      // Kart numarası otomatik boşluk ekle
+      document.getElementById("kartNo").addEventListener("input", function (e) {
+        let value = e.target.value.replace(/\D/g, "").slice(0, 16);
+        value = value.replace(/(.{4})/g, "$1 ").trim();
+        e.target.value = value;
+      });
+
+      // Son kullanma tarihi otomatik / ekle
+      document
+        .getElementById("sonKullanma")
+        .addEventListener("input", function (e) {
+          let value = e.target.value.replace(/\D/g, "").slice(0, 4);
+          if (value.length > 2)
+            value = value.slice(0, 2) + "/" + value.slice(2);
+          e.target.value = value;
+        });
+
+      // Rezervasyon fonksiyonunda kredi kartı validasyonu ekleyin
+      function rezervasyonYap() {
+        // Form alanlarını kontrol et
+        const ad = document.getElementById("ad").value;
+        const soyad = document.getElementById("soyad").value;
+        const email = document.getElementById("email").value;
+        const telefon = document.getElementById("telefon").value;
+        const odemeYontemiSec = odemeYontemi.value;
+
+        if (!ad || !soyad || !email || !telefon) {
+          alert("Lütfen tüm bilgileri eksiksiz doldurunuz.");
+          return;
+        }
+
+        if (odemeYontemiSec === "kredi") {
+          const kartNo = document
+            .getElementById("kartNo")
+            .value.replace(/\s/g, "");
+          const sonKullanma = document.getElementById("sonKullanma").value;
+          const cvv = document.getElementById("cvv").value;
+
+          if (!/^\d{16}$/.test(kartNo)) {
+            alert("Kart numarası 16 haneli olmalıdır.");
+            return;
+          }
+          if (!/^\d{2}\/\d{2}$/.test(sonKullanma)) {
+            alert("Son kullanma tarihi AA/YY formatında olmalıdır.");
+            return;
+          }
+          const [ay, yil] = sonKullanma.split("/").map(Number);
+          const now = new Date();
+          const currentYear = now.getFullYear() % 100;
+          const currentMonth = now.getMonth() + 1;
+          if (
+            ay < 1 ||
+            ay > 12 ||
+            yil < currentYear ||
+            (yil === currentYear && ay < currentMonth)
+          ) {
+            alert(
+              "Son kullanma tarihi geçerli ve bugünden ileri bir tarih olmalıdır."
+            );
+            return;
+          }
+          if (!/^\d{3}$/.test(cvv)) {
+            alert("CVV 3 haneli olmalıdır.");
+            return;
+          }
+        }
+
+        // Mesajları gizle
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none";
+
+        if (musaitlikDurumu) {
+          successMessage.style.display = "block";
+          errorMessage.style.display = "none";
+        } else {
+          successMessage.style.display = "none";
+          errorMessage.style.display = "block";
+        }
+      }
+      // Mesajları gizle
+      successMessage.style.display = "none";
+      errorMessage.style.display = "none";
+
+      if (musaitlikDurumu) {
+        successMessage.style.display = "block";
+        errorMessage.style.display = "none";
+      } else {
+        successMessage.style.display = "none";
+        errorMessage.style.display = "block";
+      }
+    </script>
+  </body>
+</html>

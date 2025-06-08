@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menü | Lezzet Durağı</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #121212;
+      --secondary: #1A1A1A;
+      --accent: #000000;
+      --text: #E8E8E8;
+      --light: #252525;
+      --white: #FFFFFF;
+      --gold: #9d2305;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.8;
+      background: var(--primary);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(18,18,18,0.98);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--accent);
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2.5rem;
+    }
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+    .main-nav .active {
+      color: var(--gold);
+    }
+    .menu-hero {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('images/menu1.jpg') center/cover no-repeat;
+    }
+    .menu-hero-content {
+      text-align: center;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+    .menu-hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 1.8rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      line-height: 1.2;
+    }
+    .menu-hero-content p {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    .menu-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    .menu-category {
+      margin-bottom: 5rem;
+    }
+    .menu-category-title {
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--accent);
+      position: relative;
+    }
+    .menu-category-title::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100px;
+      height: 2px;
+      background: var(--gold);
+    }
+    .menu-items {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .menu-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding-left: 0;
+      margin-bottom: 2.5rem;
+    }
+    .menu-item::before {
+      display: none;
+    }
+    .menu-item-image {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .menu-item-tags {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .vegan-tag {
+      background: #228B22;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .allergen-info {
+      font-size: 0.75rem;
+      color: #ff6b6b;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .menu-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      margin: 3rem 0;
+      opacity: 0.3;
+    }
+    .seasonal-note {
+      text-align: center;
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.7;
+      margin-top: 4rem;
+    }
+    .site-footer {
+      background: var(--primary);
+      color: var(--text);
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-top: 1px solid var(--accent);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-bottom: 3rem;
+    }
+    .social-links a {
+      color: var(--text);
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0.7;
+    }
+    @media (max-width: 768px) {
+      .menu-hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .menu-category-title {
+        font-size: 1.8rem;
+      }
+      .menu-item {
+        grid-template-columns: 1fr;
+      }
+      .menu-item-image {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">Lezzet Durağı</div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index1.html">Ana Sayfa</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="menu-hero">
+    <div class="menu-hero-content">
+      <h1>Lezzet Şöleni</h1>
+      <p>Şefimizin özenle hazırladığı, mevsimin en taze malzemeleriyle oluşturulmuş seçkin lezzetler</p>
+    </div>
+  </section>
+
+  <div class="menu-container">
+    <div class="menu-category">
+      <h2 class="menu-category-title">Başlangıçlar</h2>
+      <div class="menu-items">
+        <div class="menu-item">
+          <img src="images/pumpkin.jpg" alt="Kremalı Balkabağı Çorbası" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Kremalı Balkabağı Çorbası</h3>
+            <p class="menu-item-desc">Tarçınlı kruton ve taze krema ile servis edilir</p>
+            <div class="allergen-info">⚠️ Gluten içerir • Süt ürünleri</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img src="images/salmon.jpg" alt="Füme Somon Kanape" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Füme Somon Kanapeler</h3>
+            <p class="menu-item-desc">Norveç somonu, avokado kreması ve dereotu ile</p>
+            <div class="menu-item-tags">
+           
+            </div>
+            <div class="allergen-info">⚠️ Balık • Soya</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img src="images/karides.jpg" alt="Karides Kokteyl" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Karides Kokteyl</h3>
+            <p class="menu-item-desc">Taze karidesler, özel kokteyl sos ve limon dilimleri ile</p>
+            <div class="allergen-info">⚠️ Kabuklu deniz ürünleri</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-category">
+      <h2 class="menu-category-title">Ana Yemekler</h2>
+      <div class="menu-items">
+        <div class="menu-item">
+          <img src="images/et.jpg" alt="Izgara Dana Bonfile" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Izgara Dana Bonfile</h3>
+            <p class="menu-item-desc">250gr Angus dana, trüflü patates ve demi-glace sos ile</p>
+            <div class="allergen-info">⚠️ Süt ürünleri</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img src="images/fish.jpg" alt="Tereyağlı Deniz Levreği" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Tereyağlı Deniz Levreği</h3>
+            <p class="menu-item-desc">Taze levrek fileto, limonlu tereyağ sos ve fırın sebzeler</p>
+            <div class="allergen-info">⚠️ Balık • Süt ürünleri</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img src="images/mantar.jpg" alt="Mantar Risotto" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Mantar Risotto</h3>
+            <p class="menu-item-desc">Yerli mantarlar, vegan parmesan ile hazırlanır</p>
+            <div class="menu-item-tags">
+              <div class="vegan-tag">VEGAN</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-category">
+      <h2 class="menu-category-title">Tatlılar</h2>
+      <div class="menu-items">
+        <div class="menu-item">
+          <img src="images/kurabiye.jpg" alt="Gül Aromalı Kurabiye" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Gül Aromalı Kurabiye</h3>
+            <p class="menu-item-desc">Vanilyalı dondurma ile servis edilir</p>
+            <div class="allergen-info">⚠️ Yumurta • Süt ürünleri</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img src="images/tatlı.jpg" alt="Orman Meyveli Cheesecake " class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Orman Meyveli Cheesecake</h3>
+            <p class="menu-item-desc">%70 kakao oranına sahip Belçika çikolatası ile servis edilir.</p>
+            <div class="menu-item-tags">
+              <div class="vegan-tag">VEGAN</div>
+            </div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <img src="images/şeftali.jpg" alt="Şeftali Tatlısı" class="menu-item-image">
+          <div class="menu-item-text">
+            <h3 class="menu-item-name">Şeftali Tatlısı</h3>
+            <p class="menu-item-desc">Taze şeftali, badem kreması ve nane ile</p>
+            <div class="allergen-info">⚠️ Kuruyemiş</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="seasonal-note">Menümüz mevsimsel malzemelere göre şefimiz tarafından günlük olarak güncellenmektedir.</p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-logo">Lezzet Durağı</div>
+     <div class="social-links">
+      <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/?locale=tr_TR"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com"><i class="fab fa-twitter"></i></a>
+      </div>
+      <p class="copyright">&copy; 2025 Lezzet Durağı. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Otelimiz</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+       body {
+  background: var(--primary);
+}
+      }
+
+      .gallery {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 0 20px;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .gallery-image-wrapper img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+        display: block;
+      }
+
+      .gallery-image-wrapper:hover img {
+        transform: scale(1.05);
+      }
+
+      .image-overlay {
+        position: absolute;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-image-wrapper:hover .image-overlay {
+        opacity: 1;
+      }
+
+      .image-overlay p {
+        margin: 5px 0;
+        font-size: 1.1rem;
+      }
+
+      @media (max-width: 768px) {
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-image-wrapper img {
+          height: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ✔️ Header kısmı ilk gönderdiğin gibi -->
+    <header class="header">
+      <div class="header-container">
+        <div class="logo">
+          <img src="resimler/logo.png" alt="Logo" class="logo-img" />
+        </div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html" class="active">Ana Sayfa</a></li>
+            <li><a href="about.html">Hakkımızda</a></li>
+            <li><a href="contact.html">İletişim</a></li>
+            <li><a href="odalar.html">Odalar</a></li>
+            <li>
+              <button class="restaurant-btn" onclick="window.location.href='index1.html'">
+                Restaurantımıza Göz Atın <i class="fas fa-mouse-pointer"></i>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="gallery">
+      <div class="gallery-grid">
+        <!-- STANDART ODA -->
+        <div class="gallery-item">
+          <a
+            href="standart-oda.html"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="gallery-image-wrapper">
+              <img
+                src="resimler/niraj-golhar-_IUPyuiHiJo-unsplash.jpg"
+                alt="Oda 1"
+              />
+              <div class="image-overlay">
+                <p>Standart Oda</p>
+                <p>Şehir manzaralı, çift kişilik</p>
+                <p>Detayları görmek için tıklayınız!</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+
+        <!-- Deluxe Oda -->
+<div class="gallery-item">
+  <a href="deluxe-oda.html" style="text-decoration: none; color: inherit">
+    <div class="gallery-image-wrapper">
+      <img src="resimler/upgraded-points-x9HiNJr4dQQ-unsplash.jpg" alt="Oda 2" />
+      <div class="image-overlay">
+        <p>Deluxe Oda</p>
+        <p>Geniş alan, deniz manzaralı</p>
+        <p>Detayları görmek için tıklayınız!</p>
+      </div>
+    </div>
+  </a>
+</div>
+
+    <!-- Suit Oda -->
+<div class="gallery-item">
+  <a href="suit-oda.html" style="text-decoration: none; color: inherit">
+    <div class="gallery-image-wrapper">
+      <img src="resimler/otel-konaklamalarinda-suit-oda-ne-demek-071099.webp" alt="Oda 3" />
+      <div class="image-overlay">
+        <p>Suit Oda</p>
+        <p>Jakuzili, oturma alanlı</p>
+        <p>Detayları görmek için tıklayınız!</p>
+      </div>
+    </div>
+  </a>
+</div>
+       <!-- Aile Odası -->
+<div class="gallery-item">
+  <a href="aile-odası.html" style="text-decoration: none; color: inherit">
+    <div class="gallery-image-wrapper">
+      <img src="resimler/tom09578.jpg" alt="Oda 4" />
+      <div class="image-overlay">
+        <p>Aile Odası</p>
+        <p>4 kişilik, iki ayrı yatak odası</p>
+        <p>Detayları görmek için tıklayınız!</p>
+      </div>
+    </div>
+  </a>
+</div>
+</div>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-logo">Nova Hotel</div>
+        <div class="footer-links">
+          <a href="gizlilik.html">Gizlilik Politikası</a>
+          <a href="saatler.html">Çalışma Saatleri</a>
+          <a href="kariyer.html">Kariyer</a>
+        </div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/"
+            ><i class="fab fa-instagram"></i
+          >
+          <a href="https://www.facebook.com/"
+            ><i class="fab fa-facebook-f"></i
+          >
+          <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p class="copyright">&copy; 2025 Nova Hotel. Tüm hakları saklıdır.</p>
+  
+      </div>
+    </footer>
+  </body>
+</html>

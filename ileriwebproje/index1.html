@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lezzet Durağı | Michelin Yıldızlı Gastronomi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #121212;
+      --secondary: #1A1A1A;
+      --accent: #000000; /* Derin bordo */
+      --text: #E8E8E8;
+      --light: #252525;
+      --white: #FFFFFF;
+      --gold: #691616;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      margin: 0;
+      line-height: 1.8;
+      background: var(--primary);
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(18,18,18,0.98);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--accent);
+    }
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 2.5rem;
+    }
+    .main-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    .main-nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--gold);
+      transition: width 0.3s ease;
+    }
+    .main-nav a:hover::after {
+      width: 100%;
+    }
+    .main-nav .active {
+      color: var(--gold);
+    }
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('images/foto1.jpg') center/cover no-repeat;
+      opacity: 0.4;
+      z-index: -1;
+    }
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 1.8rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+      line-height: 1.2;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    .btn-gold {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 1rem 2.8rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .btn-gold:hover {
+      background: var(--gold);
+      color: var(--primary);
+    }
+    
+    .michelin-badge {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: var(--gold);
+  padding: 1rem 2.5rem; /* Daha büyük padding */
+  border: 2px solid var(--gold); /* Daha kalın kenarlık */
+  border-radius: 30px;
+  font-size: 1rem; /* Yazı boyutunu artır */
+  font-weight: 600; /* Yazıyı kalınlaştır */
+  margin-top: 3rem;
+  letter-spacing: 1.2px; /* Harfler arası boşluk */
+  transition: all 0.3s ease;
+  text-transform: uppercase; /* Yazıyı büyük harf yap */
+}
+
+.michelin-badge:hover {
+  background: var(--gold); /* Hover sırasında arka plan rengi */
+  color: var(--primary); /* Yazı rengini değiştir */
+  transform: scale(1.05); /* Hover sırasında büyütme efekti */
+}
+
+.michelin-badge i {
+  margin-right: 0.8rem;
+  font-size: 1.2rem; /* Simge boyutunu artır */
+} 
+
+    .about-section {
+      padding: 8rem 0;
+      background: var(--secondary);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 6rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 2px;
+      background: var(--accent);
+      margin: 1.8rem auto;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-text {
+      padding: 1rem;
+    }
+    .about-text h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--gold);
+    }
+    .about-text p {
+      margin-bottom: 1.8rem;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      letter-spacing: 0.3px;
+    }
+    .about-img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      height: 500px;
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1s ease;
+    }
+    .about-img:hover img {
+      transform: scale(1.03);
+    }
+    .signature {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      margin-top: 3rem;
+      text-align: right;
+      font-size: 1.2rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .team-section {
+      padding: 8rem 0;
+      background: var(--primary);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+    .team-card {
+      position: relative;
+      overflow: hidden;
+      height: 450px;
+    }
+    .team-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+    .team-card:hover .team-img {
+      transform: scale(1.05);
+    }
+    .team-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      padding: 2.5rem 2rem;
+      color: var(--white);
+    }
+    .team-name {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+    }
+    .team-role {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+    .team-quote {
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.7;
+      letter-spacing: 0.3px;
+    }
+    .philosophy-section {
+      padding: 8rem 0;
+      background: var(--secondary);
+      text-align: center;
+    }
+    .philosophy-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .philosophy-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+      line-height: 2;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+    }
+    .quote-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      opacity: 0.3;
+      margin-bottom: 3rem;
+    }
+    .site-footer {
+      background: var(--primary);
+      color: var(--text);
+      padding: 5rem 0 3rem;
+      text-align: center;
+      border-top: 1px solid var(--accent);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      margin-bottom: 3rem;
+    }
+    .social-links a {
+      color: var(--text);
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+    .social-links a:hover {
+      color: var(--gold);
+      transform: translateY(-3px);
+    }
+    .copyright {
+      font-size: 0.8rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 4rem;
+      }
+      .header-container {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .main-nav ul {
+        margin-top: 1rem;
+        gap: 1.5rem;
+      }
+      .about-img {
+        height: 350px;
+      }
+    }
+    .back-to-hotel-btn {
+  background-color: var(--gold);
+  color: var(--white);
+  border: none;
+  padding: 10px 30px; /* Buton boyutunu artırmak için padding */
+  border-radius: 8px; /* Daha yuvarlak köşeler */
+  font-size: 1rem; /* Yazı boyutunu büyüt */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Metin ve simge arasındaki boşluk */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-to-hotel-btn i {
+  font-size: 1.2rem; /* Simge boyutunu artır */
+}
+
+.back-to-hotel-btn:hover {
+  background-color: rgba(136, 119, 63, 0.8); /* Hover sırasında arka plan rengi */
+  transform: translateY(-2px); /* Hover sırasında hafif yukarı hareket */
+}
+.reservation-btn {
+  background-color: var(--gold);
+  color: var(--white);
+  border: none;
+  padding: 10px 30px; /* Buton boyutunu artırmak için padding */
+  border-radius: 8px; /* Daha yuvarlak köşeler */
+  font-size: 1rem; /* Yazı boyutunu büyüt */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Metin ve simge arasındaki boşluk */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reservation-btn i {
+  font-size: 1.2rem; /* Simge boyutunu artır */
+}
+
+.reservation-btn:hover {
+  background-color: rgba(136, 119, 63, 0.8); /* Hover sırasında arka plan rengi */
+  transform: translateY(-2px); /* Hover sırasında hafif yukarı hareket */
+}
+  </style>
+</head>
+<body>
+ 
+<header class="header">
+  <div class="header-container">
+    <div class="logo">Lezzet Durağı</div>
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <button class="reservation-btn" onclick="window.location.href='restaurantrezervasyon.html'">
+            Rezervasyon Yap <i class="fas fa-calendar-alt"></i>
+          </button>
+        </li>
+        <li>
+          <button class="back-to-hotel-btn" onclick="window.location.href='index.html'">
+            Nova Hotel'e Geri Dön <i class="fas fa-mouse-pointer"></i> 
+          </button>
+       </li>
+      </ul>     
+    </nav>
+  </div>
+</header>
+
+  <section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>Michelin Yıldızlı Gastronomi Deneyimi</h1>
+      <p>Lezzetin zirvesinde, her detayı özenle düşünülmüş unutulmaz bir yolculuk. Geleneksel ile modernin buluştuğu, her dokunuşta tutkunun hissedildiği bir lezzet şöleni.</p>
+     
+      <a href="menu.html" class="michelin-badge">
+        <i class="fas fa-utensils"></i>
+        <span>MENÜYÜ KEŞFET</span>
+      </a>
+   
+      <a href="Special.html" class="michelin-badge">
+  <i class="fas fa-star"></i>
+  <span>ÖZEL YEMEĞİ KEŞFET</span>
+</a>
+
+    
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="container">
+      <h2 class="section-title">Hakkımızda</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <h3>Bir Tutku Hikayesi</h3>
+          <p>2012 yılında küçük bir aile restoranı olarak başlayan yolculuğumuz, bugün gastronomi dünyasının saygın adreslerinden biri olmamızla taçlandı. Şefimiz Ahmet Kılıç'ın Fransa'daki 3 Michelin yıldızlı restoranlardaki deneyimiyle harmanladığı Anadolu lezzetleri, bizi eşsiz kılan temel taş oldu.</p>
+          <p>Mutfak felsefemizde üç temel prensip var: Mevsiminde ürünler, geleneksel teknikler ve sürdürülebilir gastronomi. Çiftçilerimizle kurduğumuz doğrudan ilişkiler sayesinde en taze malzemeleri mutfağımıza taşıyoruz.</p>
+          <div class="signature">Ahmet KILIÇ<br>Baş Şef & Kurucu</div>
+        </div>
+        <div class="about-img">
+          <img src="images/food1.jpg" alt="Şef mutfakta">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <div class="container">
+      <h2 class="section-title">Ekibimiz</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="images/chef1.jpg" alt="Baş Şef" class="team-img">
+          <div class="team-overlay">
+            <h3 class="team-name">Ahmet KILIÇ</h3>
+            <p class="team-role">Baş Şef & Kurucu</p>
+            <p class="team-quote">"Lezzet, en basit haliyle doğanın sunduğu armağandır. Biz sadece onu doğru şekilde sunarız."</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="images/chef2.jpg" alt="Pastane Şefi" class="team-img">
+          <div class="team-overlay">
+            <h3 class="team-name">Ece Tatlı</h3>
+            <p class="team-role">Pastane Şefi</p>
+            <p class="team-quote">"Tatlılar mutluluğun dilidir. Her lokmada bir hikaye anlatırız."</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <img src="images/chef3.jpg" alt="Şarap Uzmanı" class="team-img">
+          <div class="team-overlay">
+            <h3 class="team-name">Can Yılmaz</h3>
+            <p class="team-role">Şarap Uzmanı</p>
+            <p class="team-quote">"Şarap, yemeğe eşlik eden bir içecek değil, onu tamamlayan bir sanat eseridir."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="philosophy-section">
+    <div class="container">
+      <div class="philosophy-content">
+        <div class="quote-icon">
+          <i class="fas fa-quote-right"></i>
+        </div>
+        <h2 class="section-title">Felsefemiz</h2>
+        <p>"Biz sadece yemek servisi yapmıyoruz, anılar yaratıyoruz. Mutfağımızda her tabak bir hikaye, her lezzet bir yolculuktur."</p>
+        <p>"Michelin yıldızı bir hedef değil, tutkumuzun doğal bir sonucuydu. Asıl ödül, misafirlerimizin gözlerindeki o ışıltıdır."</p>
+      </div>
+    </div>
+  </section>
+  <footer class="site-footer">
+  <div class="container">
+    <div class="footer-logo">Lezzet Durağı</div>
+    <div class="footer-links">
+      <a href="gizlilik-politikasi.html">Gizlilik Politikası</a>
+      <a href="calisma-saatleri.html">Çalışma Saatleri</a>
+      <a href="kariyer1.html">Kariyer</a>
+    </div>
+    <div class="social-links">
+      <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/?locale=tr_TR"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://x.com"><i class="fab fa-twitter"></i></a>
+    </div>
+    <p class="copyright">&copy; 2025 Lezzet Durağı. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+ 
+</body>
+</html>

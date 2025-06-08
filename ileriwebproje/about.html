@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Hotel | Eşsiz Lüks Deneyim</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* HAKKIMIZDA ABOUT.COM CSS BAŞLANGIÇ*/
+        :root {
+            --primary: #121212;
+            --secondary: #1A1A1A;
+            --accent: #000000;
+            --text: #E8E8E8;
+            --light: #252525;
+            --white: #FFFFFF;
+            --gold: #691616;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            background-color: var(--primary);
+            line-height: 1.8;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.835); /* Arka plan */
+            -webkit-backdrop-filter: blur(8px); /* Blur efekti */
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            padding: 0.1rem 0; /* Header yüksekliği */
+            border-bottom: 1px solid var(--accent); /* Alt çizgi */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem; /* İç boşluk */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+
+        .logo-img {
+            width: 150px;
+            height: auto;
+            object-fit: contain;
+            margin-left: 0;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 0.001rem;
+        }
+
+        .main-nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem; /* Yazı boyutu */
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0; /* Alt çizgi için boşluk */
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .main-nav a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold); /* Alt çizgi rengi */
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover::after {
+            width: 100%; /* Hover sırasında alt çizgi genişler */
+        }
+
+        .main-nav .active {
+            color: var(--gold); /* Aktif bağlantı rengi */
+        }
+
+        .main-nav a.active {
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+
+       
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(26, 26, 26, 0.7));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+       
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .fullscreen-slider {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            padding: 0 0 10% 10%;
+        }
+
+        .slide-caption {
+            background: rgba(0,0,0,0.7);
+            padding: 2rem;
+            max-width: 500px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .slide-caption h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .slide-caption p {
+            font-size: 1.1rem;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--gold);
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--white);
+            opacity: 0.6;
+            width: 12px;
+            height: 12px;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--gold);
+            opacity: 1;
+        }
+
+        .about-section {
+            padding: 6rem 0;
+            background: linear-gradient(rgba(18,18,18,0.9), rgba(26,26,26,0.9));
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .gold-border {
+            border-bottom: 3px solid var(--gold);
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .mission-statement {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--secondary);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .founders-section {
+            padding: 6rem 0;
+            background: var(--secondary);
+        }
+
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .founder-card {
+            background: var(--primary);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .founder-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            z-index: 2;
+        }
+        .founder-story {
+            opacity: 0;
+            max-height: 0;
+            transition: opacity 0.4s, max-height 0.4s;
+            overflow: hidden;
+            margin-top: 1rem;
+            color: var(--text);
+            background: rgba(26,26,26,0.95);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .founder-card:hover .founder-story {
+            opacity: 1;
+            max-height: 300px;
+        }
+
+        .founder-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .position {
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        blockquote {
+            font-style: italic;
+            margin-top: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        blockquote::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--gold);
+            position: absolute;
+            left: -1rem;
+            top: -1rem;
+            opacity: 0.3;
+        }
+
+        .awards-section {
+            padding: 6rem 0;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .award-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .award-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .site-footer {
+            background: var(--accent);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--gold);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+        }
+
+        .copyright {
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+     
+
+        /* Mevcut stilleriniz */
+        .hero-section {
+            background: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gold-text {
+            color: #a81919;
+        }
+       
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo{
+                margin-bottom: 1rem;
+            }
+
+            .main-nav ul {
+                margin-top: 1rem;
+                gap: 1.5rem;
+            }
+
+            .slide-caption {
+                padding: 1rem;
+                margin-left: 5%;
+            }
+
+            .swiper-button-next,
+            .swiper-button-prev {
+                width: 40px;
+                height: 40px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="resimler/logo.png" alt="Logo" class="logo-img">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" style="color: #691616;" >Ana Sayfa</a></li>
+                    <li><a href="about.html" >Hakkımızda</a></li>
+                    <li><a href="contact.html">İletişim</a></li>
+                    <li><a href="odalar.html">Odalar</a></li>
+                    <li>
+                        <button class="restaurant-btn" onclick="window.location.href='index1.html'">
+                          Restaurantımıza Göz Atın <i class="fas fa-mouse-pointer"></i>
+                        </button>
+                    </li>
+                   
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" style="background-image: url('resimler/hakkimizde3.jpg'); background-size: cover; background-position: center;">
+        <div class="hero-overlay">
+            <div class="hero-content">                
+                <h1>İstanbul'un Zarafetinde<br><span class="gold-text">Kendinizi Şımartın</span></h1>
+                <p class="hero-subtitle">2000'den beri misafirperverliğin doruk noktası</p>
+            </div>
+        </div>
+    </section>
+    <!-- Fullscreen Slider -->
+    <section class="fullscreen-slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url('resimler/hoteldis.jpg')">
+                    <div class="slide-caption">
+                        <h3>Muhteşem Mimari</h3>
+                        <p>Osmanlı ve modern tasarımın buluşması</p>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url('resimler/HOTEL5.jpg')">
+                    <div class="slide-caption">
+                        <h3>Eşsiz Manzarası</h3>
+                        <p>Eşsiz İstanbul panoraması</p>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url('resimler/hoteldis3.jpg')">
+                    <div class="slide-caption">
+                        <h3>Lüks Detaylar</h3>
+                        <p>Özenle seçilmiş her unsur</p>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide" style="background-image: url('resimler/HOTEL4.jpg')">
+                    <div class="slide-caption">
+                        <h3>Geleneksel Misafirperverlik</h3>
+                        <p>Her misafirimiz bizim için özeldir</p>
+                   </div>                      
+                </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Biz Kimiz -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2 class="section-title gold-border">Biz Kimiz?</h2>
+                <div class="mission-statement">
+                    <p>2000 yılından bu yana İstanbul'un kalbinde konuklarımızı ağırlamaktan gurur duyuyoruz. Geleneksel Türk misafirperverliğini modern lüksle buluşturarak, şehrin tarihi dokusunu odalarımızın her köşesine yansıtıyoruz.</p>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-medal"></i>
+                        <h3>25 Yıllık Deneyim</h3>
+                        <p>Misafir memnuniyetinde sektör lideri</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-award"></i>
+                        <h3>5 Yıldızlı Hizmet</h3>
+                        <p>Uluslararası standartlarda konfor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kurucular -->
+    <section class="founders-section">
+        <div class="container">
+            <h2 class="section-title">Kurucu Ailemiz</h2>
+            <div class="founders-grid">
+                <div class="founder-card">
+                    <img src="resimler/ADAM1.jpg" alt="Ahmet Nova" class="founder-img">
+                    <div class="founder-info">
+                        <h3>Ahmet Nova</h3>
+                        <p class="position">Kurucu (2000-2020)</p>
+                        <blockquote>"Mimarinin şiirini yazdık taşlarla"</blockquote>
+                         <div class="founder-story">
+                            1970 yılında İstanbul’da doğdu. Nova Hotel’in temellerini 2000 yılında attı. Misafirperverliği ve vizyonerliğiyle oteli kısa sürede şehrin en prestijli otellerinden biri haline getirdi.
+                        </div>
+                    </div>
+                </div>
+                <div class="founder-card">
+                    <img src="resimler/ADAM2.jpg" alt="Mehmet Nova" class="founder-img">
+                    <div class="founder-info">
+                        <h3>Mehmet Nova</h3>
+                        <p class="position">İkinci Nesil (2020-2025)</p>
+                        <blockquote>"Gelenek geleceğe köprüdür"</blockquote>
+                        <div class="founder-story">
+                            1995 doğumlu Mehmet Nova, babasından devraldığı oteli dijitalleşme ve modernleşme vizyonuyla yeni bir çağa taşıdı. Yenilikçi hizmet anlayışıyla Nova Hotel’in uluslararası ödüller kazanmasını sağladı.
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ödüller -->
+    <section class="awards-section">
+        <div class="container">
+            <h2 class="section-title">Başarılarımız</h2>
+            <div class="awards-grid">
+                <div class="award-card">
+                    
+                    <div class="award-content">
+                        <i class="fas fa-star" style="font-size:2rem; color:var(--gold); margin-bottom:0.5rem;"></i>
+                        <h3>Michelin Yıldızlı Mutfak</h3>
+                        <p>2018'den beri kesintisiz</p>
+                    </div>
+                </div>
+                <div class="award-card">
+                    <div class="award-content">
+                        <i class="fas fa-star" style="font-size:2rem; color:var(--gold); margin-bottom:0.5rem;"></i>
+                        <h3>5 Yıldızlı Lüks</h3>
+                        <p>Dünya Lüks Oteller Birliği</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-logo">Nova Hotel</div>
+            <div class="footer-links">
+                <a href="gizlilik.html">Gizlilik Politikası</a>
+                <a href="saatler.html">Çalışma Saatleri</a>
+                <a href="kariyer.html">Kariyer</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/campaign/landing.php?&campaign_id=1603087355&extra_1=s%7Cc%7C305038450784%7Ce%7Cfacebook%27%7C&placement=&creative=305038450784&keyword=facebook%27&partner_id=googlesem&extra_2=campaignid%3D1603087355%26adgroupid%3D61834755758%26matchtype%3De%26network%3Dg%26source%3Dnotmobile%26search_or_content%3Ds%26device%3Dc%26devicemodel%3D%26adposition%3D%26target%3D%26targetid%3Dkwd-362360550869%26loc_physical_ms%3D9198820%26loc_interest_ms%3D%26feeditemid%3D%26param1%3D%26param2%3D&gad_source=1&gad_campaignid=1603087355&gbraid=0AAAAAD2MkOXed74uW_OOhdaNlnaWgyyQD&gclid=Cj0KCQjw0LDBBhCnARIsAMpYlAqfc9exAwxjQIEdLf0bNJk7TJD6PdAGcFSSelCkkvvNnufk9dvFLdgaAjZgEALw_wcB"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="copyright">&copy; 2025 Nova Hotel. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 1700, // Adjust the delay for slide transition
+                    disableOnInteraction: false,
+                },
+                effect: 'slide', // Ensure the slide effect is applied
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
+</body>
+</html>

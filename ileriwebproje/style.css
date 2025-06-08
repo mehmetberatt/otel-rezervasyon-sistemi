@@ -1,0 +1,652 @@
+/* Mevcut temel stiller */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #121212;
+  --secondary: #1a1a1a;
+  --accent: #000000;
+  --text: #e8e8e8;
+  --light: #252525;
+  --white: #ffffff;
+  --gold: #691616;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.8;
+  background: var(--primary);
+  overflow-x: hidden;
+}
+
+.contact-page {
+  background: url("resimler/iletisimbackgroun.jpg") no-repeat center center
+    fixed;
+  background-size: cover; /* Arka planın tüm alanı kaplamasını sağlar */
+}
+.contact-page .site-footer {
+  background: none; /* Arka planı kaldırır */
+  border-top: none; /* Üst sınırı kaldırır (isteğe bağlı) */
+  color: var(--text); /* Metin rengini korur */
+  padding: 2rem 0; /* İç boşluk */
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(18, 18, 18, 0.835);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  padding: 0.1rem 0;
+  border-bottom: 1px solid var(--accent);
+}
+
+.header-container {
+  color: #691616;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Logo ile yazı arasındaki boşluk */
+}
+
+.logo img {
+  width: 150px; /* Logonun genişliği */
+  height: auto; /* Yükseklik orantılı olarak ayarlanır */
+  object-fit: contain; /* Logonun düzgün görünmesi için */
+}
+
+.main-nav ul {
+  display: flex;
+  justify-content: space-between; /* Elemanları sola ve sağa yayar */
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Menü elemanları için boşluk */
+.main-nav ul li {
+  margin-right: 20px; /* Menü elemanları arasındaki boşluk */
+}
+
+/* Restaurant butonu */
+.main-nav ul li:last-child {
+  margin-left: auto; /* Butonu en sağa taşır */
+}
+
+.main-nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+.main-nav a.active {
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.main-nav a:hover::after {
+  width: 100%;
+}
+
+.main-nav .active {
+  color: var(--gold);
+}
+
+.hero-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 80px;
+  margin: 0;
+  padding: 0;
+  background: none; /* Arka planı kaldırır */
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("resimler/background2.jpg") center/cover no-repeat;
+  opacity: 0.4;
+  z-index: -1;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  margin-bottom: 1.8rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.btn-gold {
+  background: linear-gradient(
+    to bottom,
+    #7f1919,
+    #e21d1d
+  ); /* Daha dikkat çekici bir arka plan gradyanı */
+  color: #ffffff; /* Metin rengini beyaz yap */
+  border: none; /* Kenar çizgisini kaldır */
+  padding: 1rem 3rem; /* Butonun boyutunu artır */
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem; /* Yazı boyutunu büyüt */
+  font-weight: 600; /* Yazıyı kalın yap */
+  cursor: pointer;
+  transition: all 0.4s ease;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 50px; /* Butonu yuvarlak köşeli yap */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Gölge ekle */
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(
+    to right,
+    #9e1a13,
+    #b51616
+  ); /* Hover sırasında farklı bir gradyan */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4); /* Hover sırasında gölgeyi artır */
+  transform: translateY(-3px); /* Hover sırasında yukarı kaldır */
+}
+.advantages-section {
+  padding: 8rem 0;
+  background: var(--secondary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 6rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 2px;
+  background: var(--accent);
+  margin: 1.8rem auto;
+}
+
+.advantage-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  padding: 3rem 0;
+}
+
+.advantage {
+  width: 300px; /* Her kart 300px genişlikte */
+  background-color: #222; /* opsiyonel: arka plan sabitle */
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.advantage:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.advantage i {
+  font-size: 3rem;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+
+.advantage h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--gold);
+}
+
+.advantage p {
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  line-height: 1.8;
+}
+
+.reviews-section {
+  padding: 8rem 0;
+  background: var(--primary);
+}
+
+.review-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+.review {
+  background: var(--light);
+  padding: 2.5rem;
+  position: relative;
+  border-radius: 2px;
+}
+
+.review::before {
+  content: '"';
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-family: "Playfair Display", serif;
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: 0.2;
+  line-height: 1;
+}
+
+.review img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--gold);
+}
+
+.review p {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.review span {
+  display: block;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.site-footer {
+  background: var(--primary);
+  color: var(--text);
+  padding: 5rem 0 3rem;
+  text-align: center;
+  border-top: 1px solid var(--accent);
+}
+.site-footer .copyright {
+  text-align: center;
+  width: 100%;
+  margin: 2rem 0 0 0;
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+.site-footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--gold);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.8rem;
+  margin-bottom: 3rem;
+}
+
+.social-links a {
+  color: var(--text);
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+@media (max-width: 992px) {
+  .main-nav ul {
+      gap: 1.5rem;
+  }
+  
+  .restaurant-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 4rem;
+  }
+  .header-container {
+    flex-direction: column;
+    
+  }
+  .main-nav {
+    width: 100%;
+  }
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .restaurant-btn-container {
+    margin: 0.5rem 0 0 0;
+    width: 100%;
+    text-align: center;
+  }
+  .restaurant-btn {
+    margin: 0.5rem 0;
+    width: 100%;
+    justify-content: center;
+
+  }
+}
+
+.rezervasyon-formu {
+  background-color: var(--light);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.rezervasyon-formu form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rezervasyon-formu label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.rezervasyon-formu input,
+.rezervasyon-formu select,
+.rezervasyon-formu textarea,
+.rezervasyon-formu button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.rezervasyon-formu input[type="date"],
+.rezervasyon-formu select,
+.rezervasyon-formu input[type="tel"],
+.rezervasyon-formu input[type="text"],
+.rezervasyon-formu input[type="email"],
+.rezervasyon-formu textarea {
+  background-color: #1f1f1f;
+  color: var(--text);
+  border: 1px solid var(--gold);
+}
+
+.rezervasyon-formu input:focus,
+.rezervasyon-formu select:focus,
+.rezervasyon-formu textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 5px var(--gold);
+}
+
+.rezervasyon-formu button {
+  background-image: linear-gradient(to right, #691616, #8c1a1a);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.rezervasyon-formu button:hover {
+  background-color: #a31414;
+}
+
+/* --- Hakkımızda ve İletişim Sayfası Modern Görünüm --- */
+.page-content {
+  background-color: var(--light);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  opacity: 0.9;
+  margin-top: 80px; /* Header yüksekliği kadar boşluk eklenir */
+}
+
+.page-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  color: var(--gold);
+}
+
+.page-content p {
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+/* Google Maps kartı için düzenleme */
+.contact-map {
+  background-color: var(--light);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.contact-map h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--gold);
+}
+
+.contact-map iframe {
+  width: 100%;
+  border-radius: 8px;
+  border: none;
+}
+.gallery-item img {
+  width: 100%;
+  max-width: 400px; /* İsteğe göre 250-400px arası olabilir */
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}
+.gallery-page {
+  margin-top: 200px; /* Header yüksekliği kadar */
+}
+body {
+  padding-top: 100px;
+}
+.gallery-item {
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gallery-image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.gallery-image-wrapper:hover .image-overlay {
+  transform: translateY(0);
+}
+
+/* Yeni restaurant butonu stilleri */
+.restaurant-btn-container {
+  margin-left: 1rem;
+  display: inline-block;
+}
+
+.restaurant-btn {
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.restaurant-btn:hover {
+  background-color: #8c1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+.restaurant-btn i {
+  margin-left: 5px;
+}
+
+.restaurant-btn:hover i {
+  transform: translateX(3px);
+}

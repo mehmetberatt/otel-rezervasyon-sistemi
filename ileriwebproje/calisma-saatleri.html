@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Çalışma Saatleri | Lezzet Durağı</title>
+  <style>
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .hour-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border: 1px solid rgba(105,22,22,0.1);
+    }
+
+    .hour-icon {
+      font-size: 2rem;
+      color: #691616;
+      margin-bottom: 1rem;
+    }
+
+    .hour-title {
+      font-family: 'Playfair Display', serif;
+      color: #2c2c2c;
+      margin: 1rem 0;
+      font-size: 1.3rem;
+    }
+
+    .hour-time {
+      color: #691616;
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin: 0.5rem 0;
+    }
+
+    .hour-note {
+      color: #666;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .hours-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hours-section">
+    <div class="hours-grid">
+      <!-- Normal Çalışma Saatleri -->
+      <div class="hour-card">
+        <div class="hour-icon">⏳</div>
+        <h3 class="hour-title">Normal Günler</h3>
+        <p class="hour-time">Pazartesi - Cumartesi</p>
+        <p class="hour-time">11:00 - 23:00</p>
+        <p class="hour-note">Son sipariş: 22:30</p>
+      </div>
+
+      <!-- Pazar & Tatiller -->
+      <div class="hour-card">
+        <div class="hour-icon">🎉</div>
+        <h3 class="hour-title">Pazar & Tatiller</h3>
+        <p class="hour-time">Özel Brunch Saati</p>
+        <p class="hour-time">12:00 - 22:00</p>
+        <p class="hour-note">Kahvaltı: 12:00-15:00</p>
+      </div>
+
+      <!-- Özel Menü -->
+      <div class="hour-card">
+        <div class="hour-icon">🌟</div>
+        <h3 class="hour-title">Özel Menü</h3>
+        <p class="hour-time">7 Çeşit Degüstasyon</p>
+        <p class="hour-time">19:00 - 21:30</p>
+        <p class="hour-note">Rezervasyon gereklidir</p>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
