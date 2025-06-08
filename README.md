@@ -53,7 +53,6 @@ This project is a real-world simulation of a reservation system developed as par
 - Visual Studio Code
 
 ## 📸 Screenshots
-
 <img width="1268" alt="hotel1" src="https://github.com/user-attachments/assets/a32db48a-7287-4d05-831f-e4bf161720db" />
 <img width="1267" alt="hotel2" src="https://github.com/user-attachments/assets/d7afa5f7-ae4c-4c92-bc3b-8ee823476a42" />
 <img width="1265" alt="hotel3" src="https://github.com/user-attachments/assets/e22ed1d6-6ff4-4372-a048-a036d01b7f6f" />
